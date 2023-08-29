@@ -1,0 +1,119 @@
+<h1>Lista de usuarios</h1>
+<hr>
+<div class="container">
+    <div class="row">
+    
+        <form *ngIf="!editButton" [formGroup]="myForm" (ngSubmit)="addUser()">
+            <div class="row">
+                <div *ngIf="this.myForm.get('mail')?.errors?.['email']" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Datos incorrectos</strong> Correo esta incorrecto
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div *ngIf="this.myForm.get('name')?.errors?.['name']" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Datos incorrectos</strong> Nombre es requerido
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div *ngIf="this.myForm.get('lastName')?.errors?.['lastName']" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Datos incorrectos</strong> Apellido es requerido
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div *ngIf="this.myForm.get('password')?.errors?.['password']" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Datos incorrectos</strong> Contraseña es requerido
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" formControlName="name" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label for="lastName">Apellido:</label>
+                    <input type="text" id="lastName" formControlName="lastName" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label for="email">Correo:</label>
+                    <input type="email" id="email" formControlName="email" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" formControlName="password" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <button  class="btn btn-success" type="submit" [disabled]="!myForm.valid">Crear</button>
+                </div>
+            </div>
+            
+        </form>
+
+        <form *ngIf="editButton" [formGroup]="myFormEdit" (ngSubmit)="update(idUser)">
+            <div class="row">
+                <div *ngIf="this.myForm.get('mail')?.errors?.['email']" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Datos incorrectos</strong> Correo esta incorrecto
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div *ngIf="this.myForm.get('name')?.errors?.['name']" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Datos incorrectos</strong> Nombre es requerido
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div *ngIf="this.myForm.get('lastName')?.errors?.['lastName']" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Datos incorrectos</strong> Apellido es requerido
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div *ngIf="this.myForm.get('password')?.errors?.['password']" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Datos incorrectos</strong> Contraseña es requerido
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" formControlName="name" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label for="lastName">Apellido:</label>
+                    <input type="text" id="lastName" formControlName="lastName" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label for="email">Correo:</label>
+                    <input type="email" id="email" formControlName="email" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" formControlName="password" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-warning" [disabled]="!myFormEdit.valid" (click)="update(idUser)">Modificar</button>
+                </div>
+            </div>
+            
+        </form>
+            
+        <br>
+        <hr>
+        
+        <!-- <button type="button" class="btn btn-primary">Primary</button> -->
+    </div>
+    <div class="row">
+        <table class="table table-stripe table-border">
+            <thead>
+                <tr>
+                    <td class="bg-info text-white">Opcion</td>
+                    <td class="bg-info text-white">Nombre</td>
+                    <td class="bg-info text-white">Apellido</td>
+                    <td class="bg-info text-white">Correo</td>
+                    <td class="bg-info text-white">Password</td>
+                </tr>
+            </thead>
+            <tr *ngFor="let user of listUser; let i=index;">
+                <td>
+                    <button class="btn btn-warning" (click)="getValue(i)">Editar</button>
+                </td>
+                <td>{{user.name}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.password}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
